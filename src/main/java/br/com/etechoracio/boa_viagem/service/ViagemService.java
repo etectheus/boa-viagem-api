@@ -11,50 +11,44 @@ import br.com.etechoracio.boa_viagem.repository.ViagemRepository;
 public class ViagemService {
 	@Autowired
 	private ViagemRepository repository;
-	
-	
-	public List<Viagem> listarTodos(){
-		
+
+	public List<Viagem> listarTodos() {
+
 		return repository.findAll();
 	}
-	
-	public Optional<Viagem> buscarPorId( Long id) {
-		
+
+	public Optional<Viagem> buscarPorId(Long id) {
+
 		return repository.findById(id);
-	
-		
+
 	}
-	
-	public boolean deletarPorId( Long id) {
+
+	public boolean deletarPorId(Long id) {
 		boolean existe = repository.existsById(id);
-		
+
 		if (existe) {
-			
-			repository.deleteById(id);}
+
+			repository.deleteById(id);
+		}
 		return existe;
-		}
-	
-	
+	}
+
 	public Viagem inserir(Viagem obj) {
-		
+
 		return repository.save(obj);
-	
-		
+
 	}
 
-	public Optional<Object> atualizar( Long id,  Viagem viagem) {
+	public Optional<Object> atualizar(Long id, Viagem viagem) {
 
-	boolean existe = repository.existsById(id);
-	
-	if (!existe) {
-		
-		return Optional.empty();
+		boolean existe = repository.existsById(id);
+
+		if (!existe) {
+
+			return Optional.empty();
 		}
-	
-	return Optional.of(repository.save(viagem));
-	
-} 
+
+		return Optional.of(repository.save(viagem));
+
 	}
-
-
-
+}

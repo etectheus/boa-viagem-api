@@ -9,49 +9,47 @@ import br.com.etechoracio.boa_viagem.entity.Gasto;
 import br.com.etechoracio.boa_viagem.repository.GastoRepository;
 
 public class GastoService {
-	
+
 	@Autowired
 	private GastoRepository repository;
-	
-	
-	public List<Gasto> listarTodos(){
-		
+
+	public List<Gasto> listarTodos() {
+
 		return repository.findAll();
 	}
-	
-	public Gasto buscarPorId(Long id) {
-		
-		Optional<Gasto> existe = repository.findById(id);
-		return existe.isPresent() ? existe.get()	 : null;
-		
+
+	public Optional<Gasto> buscarPorId(Long id) {
+
+		return repository.findById(id);
+
 	}
-	
-	public boolean deletarPorId( Long id) {
+
+	public boolean deletarPorId(Long id) {
 		boolean existe = repository.existsById(id);
-		
+
 		if (existe) {
-			
-			repository.deleteById(id);}
-		return existe;
+
+			repository.deleteById(id);
 		}
-	
-	public Gasto inserir(Gasto obj) {
-		
-		return repository.save(obj);
-	
-		
+		return existe;
 	}
 
-	public Optional<Gasto> atualizar( Long id,  Gasto gasto) {
+	public Gasto inserir(Gasto obj) {
 
-	boolean existe = repository.existsById(id);
-	
-	if (!existe) {
-		
-		return Optional.empty();
+		return repository.save(obj);
+
+	}
+
+	public Optional<Gasto> atualizar(Long id, Gasto gasto) {
+
+		boolean existe = repository.existsById(id);
+
+		if (!existe) {
+
+			return Optional.empty();
 		}
-	
-	return Optional.of(repository.save(gasto));
 
-	
-} }
+		return Optional.of(repository.save(gasto));
+
+	}
+}
